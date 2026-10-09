@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antigravity SiteSeller Engine | Global Mission Control</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #080A10; }
+    .font-mono-tech { font-family: 'Space Grotesk', monospace; }
+    .glass-card { background: rgba(18, 22, 34, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-card:hover { border-color: rgba(255, 255, 255, 0.15); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #080A10; }
+    ::-webkit-scrollbar-thumb { background: #1E2436; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen antialiased flex flex-col">
+
+  <!-- TOP APP HEADER -->
+  <header class="border-b border-slate-800 bg-[#0A0D16]/90 sticky top-0 z-40 backdrop-blur-md px-4 sm:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 via-amber-500 to-yellow-600 flex items-center justify-center text-black text-lg font-black shadow-lg shadow-amber-500/20">
+          ⚡
+        </div>
+        <div>
+          <h1 class="text-base font-extrabold tracking-tight text-white flex items-center gap-2">
+            SiteSeller Global Engine
+            <span class="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-mono-tech">
+              ● AGENT LIVE
+            </span>
+          </h1>
+          <p class="text-xs text-slate-400 font-mono-tech">Autonomous B2B Lead Hunting & High-Ticket Outreach</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Target Markets Indicator -->
+        <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-300 font-mono-tech">
+          <span>Targeting:</span>
+          <span title="Dubai">🇦🇪 UAE</span>
+          <span>•</span>
+          <span title="United States">🇺🇸 USA</span>
+          <span>•</span>
+          <span title="Australia">🇦🇺 AUS</span>
+        </div>
+
+        <button onclick="openConfigModal()" class="px-3.5 py-2 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-2 transition">
+          <i class="fas fa-sliders text-amber-400"></i> Settings
+        </button>
+
+        <button onclick="openAddLeadModal()" class="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-black text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-amber-400/20 transition">
+          <i class="fas fa-plus"></i> Add Lead
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN BODY -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+
+    <!-- KPI STATS BAR -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+      
+      <div class="glass-card rounded-2xl p-4 space-y-1">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
+          <span>Active Pipeline</span>
+          <i class="fas fa-users text-amber-400"></i>
+        </div>
+        <p id="stat-total" class="text-2xl font-black text-white">0</p>
+        <p class="text-[11px] text-slate-400 font-mono-tech">Verified Prospects</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-4 space-y-1">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
+          <span>Demos Ready</span>
+          <i class="fas fa-globe text-cyan-400"></i>
+        </div>
+        <p id="stat-demos" class="text-2xl font-black text-cyan-400">0</p>
+        <p class="text-[11px] text-slate-400 font-mono-tech">Live & Interactive</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-4 space-y-1">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
+          <span>Pitches Sent</span>
+          <i class="fab fa-whatsapp text-emerald-400"></i>
+        </div>
+        <p id="stat-contacted" class="text-2xl font-black text-emerald-400">0</p>
+        <p class="text-[11px] text-slate-400 font-mono-tech">1-Click WhatsApp</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-4 space-y-1">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-semibold">
+          <span>Deals Closed</span>
+          <i class="fas fa-trophy text-yellow-400"></i>
+        </div>
+        <p id="stat-closed" class="text-2xl font-black text-yellow-400">0</p>
+        <p class="text-[11px] text-slate-400 font-mono-tech">Clients Won</p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-4 space-y-1 col-span-2 md:col-span-1 bg-gradient-to-br from-amber-950/40 via-yellow-950/20 to-slate-900 border-amber-500/30">
+        <div class="flex items-center justify-between text-amber-300 text-xs font-semibold">
+          <span>Projected Revenue</span>
+          <i class="fas fa-coins text-amber-400"></i>
+        </div>
+        <p id="stat-revenue" class="text-2xl font-black text-amber-400 font-mono-tech">0 AED</p>
+        <p class="text-[11px] text-slate-400 font-mono-tech">Based on Deals Closed</p>
+      </div>
+
+    </div>
+
+    <!-- GLOBAL LEAD HUNTER ENGINE BAR -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+        <div>
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fas fa-crosshairs text-amber-400"></i>
+            International Lead Hunter & Instant Site Generator
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">
+            Select your target country/market. The engine automatically pulls verified businesses without modern websites and builds their bespoke demo instantly.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-slate-400 font-mono-tech">Daily Target:</span>
+          <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-400/10 text-amber-400 border border-amber-400/30 font-mono-tech">15 Demos / Day</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
+        
+        <!-- Country & City Selector -->
+        <div class="sm:col-span-4">
+          <label class="block text-xs font-bold text-slate-300 mb-1.5 font-mono-tech">Target Country & City</label>
+          <select id="input-city" onchange="handleMarketChange(this.value)" class="w-full bg-[#0C0F1A] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+            <option value="dubai" selected>🇦🇪 Dubai, UAE (Al Quoz, Business Bay)</option>
+            <option value="usa">🇺🇸 United States (Miami, Los Angeles, Dallas)</option>
+            <option value="australia">🇦🇺 Australia (Sydney, Melbourne, Brisbane)</option>
+            <option value="karachi">🇵🇰 Pakistan (Karachi, Lahore, Islamabad)</option>
+          </select>
+        </div>
+
+        <!-- High-Ticket Niche -->
+        <div class="sm:col-span-5">
+          <label class="block text-xs font-bold text-slate-300 mb-1.5 font-mono-tech flex items-center justify-between">
+            <span>High-Ticket Niche</span>
+            <span class="text-[10px] text-amber-400 font-bold">100% Bespoke Sites</span>
+          </label>
+          <select id="input-niche" class="w-full bg-[#0C0F1A] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+            <option value="Car Detailing & Ceramic Studio" selected>🔥 Car Detailing & PPF (⭐ 100% Highest ROI / Fast Closure)</option>
+            <option value="Aesthetic Clinics & Salons">✨ Aesthetic Clinics, MedSpas & Skin Care</option>
+            <option value="Dental Care & Implants">🦷 Cosmetic Dentistry & Smile Design</option>
+            <option value="Solar Panel Installation">☀️ Solar Energy & Renewable Installation</option>
+          </select>
+        </div>
+
+        <!-- Hunt Button -->
+        <div class="sm:col-span-3">
+          <button id="btn-hunt" onclick="launchHunt()" class="w-full bg-amber-400 hover:bg-amber-300 text-black font-extrabold py-2.5 px-4 rounded-xl shadow-lg shadow-amber-400/20 flex items-center justify-center gap-2 transition transform active:scale-95 text-xs font-mono-tech uppercase tracking-wider">
+            <i class="fas fa-bolt"></i>
+            <span>Hunt & Build Demos</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LEADS PIPELINE SECTION -->
+    <div class="space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        
+        <div class="flex flex-wrap items-center gap-2">
+          <h3 class="text-base font-bold text-white">Active Outreach Pipeline</h3>
+          <span id="lead-count-badge" class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-mono-tech">0</span>
+
+          <!-- Country Filter Pills -->
+          <div class="flex items-center gap-1.5 ml-2">
+            <button onclick="filterByMarket('ALL')" class="market-pill active text-[11px] font-mono-tech font-bold px-2.5 py-1 rounded-lg bg-amber-400 text-black">ALL</button>
+            <button onclick="filterByMarket('UAE')" class="market-pill text-[11px] font-mono-tech font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">🇦🇪 UAE</button>
+            <button onclick="filterByMarket('USA')" class="market-pill text-[11px] font-mono-tech font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">🇺🇸 USA</button>
+            <button onclick="filterByMarket('Australia')" class="market-pill text-[11px] font-mono-tech font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">🇦🇺 AUS</button>
+            <button onclick="filterByMarket('Pakistan')" class="market-pill text-[11px] font-mono-tech font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:text-white border border-slate-700">🇵🇰 PAK</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <label class="flex items-center gap-1.5 text-xs text-slate-400 cursor-pointer bg-slate-900 px-3 py-1.5 rounded-xl border border-slate-800 hover:text-white transition select-none">
+            <input type="checkbox" id="chk-hide-contacted" onchange="toggleHideContacted(this.checked)" class="rounded text-amber-400 focus:ring-0">
+            <span>Hide Pitched Leads</span>
+          </label>
+          
+          <button onclick="loadLeads()" class="p-2 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white transition" title="Refresh">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- LEADS CONTAINER -->
+      <div id="leads-container" class="grid gap-4">
+        <!-- Rendered via JavaScript -->
+        <div class="glass-card rounded-2xl p-12 text-center text-slate-500">
+          <i class="fas fa-spinner fa-spin text-2xl text-amber-400 mb-3"></i>
+          <p>Loading agent pipeline...</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- PITCH OUTREACH MODAL -->
+  <div id="modal-pitch" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card bg-[#0D101C] rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 border border-slate-700 shadow-2xl">
+      
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <h3 id="modal-pitch-title" class="text-lg font-bold text-white">Outreach Pitch</h3>
+            <span id="modal-market-badge" class="px-2 py-0.5 rounded text-[10px] font-mono-tech font-bold bg-amber-400/10 text-amber-400 border border-amber-400/30">
+              🇦🇪 DUBAI OUTREACH
+            </span>
+          </div>
+          <p id="modal-pitch-subtitle" class="text-xs text-slate-400">Pre-personalized message with live demo link</p>
+        </div>
+        <button onclick="closePitchModal()" class="text-slate-400 hover:text-white p-2">
+          <i class="fas fa-times text-lg"></i>
+        </button>
+      </div>
+
+      <!-- OUTREACH STAGES TABS -->
+      <div class="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-2 text-xs font-bold font-mono-tech">
+        <button id="tab-btn-wa" onclick="switchPitchTab('wa')" class="px-3.5 py-2 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+          <i class="fab fa-whatsapp"></i> 1. Initial Pitch
+        </button>
+        <button id="tab-btn-fu1" onclick="switchPitchTab('fu1')" class="px-3.5 py-2 rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5">
+          <i class="fas fa-reply"></i> 2. Day-2 Follow-Up
+        </button>
+        <button id="tab-btn-fu2" onclick="switchPitchTab('fu2')" class="px-3.5 py-2 rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5">
+          <i class="fas fa-hourglass-end text-amber-400"></i> 3. 48h Final Call
+        </button>
+        <button id="tab-btn-email" onclick="switchPitchTab('email')" class="px-3.5 py-2 rounded-xl text-slate-400 hover:text-white flex items-center gap-1.5">
+          <i class="fas fa-envelope"></i> 4. Cold Email
+        </button>
+      </div>
+
+      <!-- WHATSAPP PITCH BOX -->
+      <div id="box-pitch-wa" class="space-y-4">
+        <div class="flex items-center justify-between text-xs px-1">
+          <span class="text-slate-400 flex items-center gap-1.5 font-mono">
+            <i class="fas fa-phone-alt text-emerald-400"></i>
+            Recipient: <strong id="modal-wa-target-number" class="text-emerald-300 font-bold tracking-wider">+971 50...</strong>
+          </span>
+          <span id="pitch-tag-hint" class="text-[11px] text-slate-400 font-medium">✨ Step 1: Initial personalized message with live demo link</span>
+        </div>
+
+        <div class="relative">
+          <textarea id="text-pitch-wa" rows="8" readonly class="w-full bg-[#070913] border border-slate-800 rounded-2xl p-4 text-xs font-mono text-slate-200 focus:outline-none leading-relaxed"></textarea>
+          <button onclick="copyToClipboard('text-pitch-wa')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-white text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+            <i class="fas fa-copy"></i> Copy Text
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+          <button onclick="markActiveLeadContacted()" class="text-xs text-slate-400 hover:text-slate-200 underline font-mono">
+            Mark as Pitched
+          </button>
+          <div class="flex items-center gap-2">
+            <a id="btn-open-wa-web" href="#" target="_blank" onclick="markActiveLeadContacted()" class="bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-emerald-500/40 font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2 text-xs font-mono-tech shadow-md" title="Open directly in WhatsApp Web in new browser tab">
+              <i class="fas fa-desktop"></i> WhatsApp Web
+            </a>
+            <a id="btn-open-wa-direct" href="#" target="_blank" onclick="markActiveLeadContacted()" class="bg-emerald-500 hover:bg-emerald-400 text-black font-black px-5 py-2.5 rounded-xl shadow-lg shadow-emerald-500/30 transition flex items-center gap-2 text-xs font-mono-tech uppercase tracking-wider" title="Open in WhatsApp Desktop or Mobile App">
+              <i class="fab fa-whatsapp text-base"></i> Open App (wa.me)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- EMAIL PITCH BOX -->
+      <div id="box-pitch-email" class="space-y-4 hidden">
+        <div>
+          <label class="block text-xs font-bold text-slate-400 mb-1">Subject Line</label>
+          <input id="text-pitch-email-subject" type="text" readonly class="w-full bg-[#070913] border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-amber-300 font-mono">
+        </div>
+        <div class="relative">
+          <textarea id="text-pitch-email-body" rows="8" readonly class="w-full bg-[#070913] border border-slate-800 rounded-2xl p-4 text-xs font-mono text-slate-200 focus:outline-none leading-relaxed"></textarea>
+          <button onclick="copyToClipboard('text-pitch-email-body')" class="absolute top-3 right-3 bg-slate-800 hover:bg-slate-700 text-white text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1.5">
+            <i class="fas fa-copy"></i> Copy Body
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONFIG SETTINGS MODAL -->
+  <div id="modal-config" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card bg-[#0D101C] rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 border border-slate-700 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-white">Agency & Global Offer Settings</h3>
+          <p class="text-xs text-slate-400">Configure your brand identity and price offers</p>
+        </div>
+        <button onclick="closeConfigModal()" class="text-slate-400 hover:text-white p-2">
+          <i class="fas fa-times text-lg"></i>
+        </button>
+      </div>
+
+      <form onsubmit="saveSettings(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Your Name</label>
+          <input id="cfg-sender-name" type="text" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Agency Name</label>
+          <input id="cfg-agency-name" type="text" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Your WhatsApp Number (for demo claim banner)</label>
+          <input id="cfg-sender-phone" type="text" placeholder="+92 300 0000000" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Default Currency</label>
+            <select id="cfg-currency" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+              <option value="AED">AED (Dubai)</option>
+              <option value="USD">USD (United States)</option>
+              <option value="AUD">AUD (Australia)</option>
+              <option value="PKR">PKR (Pakistan)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Price Offer per Website</label>
+            <input id="cfg-price-offer" type="text" placeholder="500 AED or $249" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required>
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeConfigModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white">Cancel</button>
+          <button type="submit" class="bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold px-5 py-2.5 rounded-xl shadow-md transition font-mono-tech uppercase">Save Settings</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD CUSTOM LEAD MODAL -->
+  <div id="modal-add-lead" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="glass-card bg-[#0D101C] rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 border border-slate-700 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-white">Add Custom Business Lead</h3>
+          <p class="text-xs text-slate-400">Add any business in Dubai, US, Australia, or Pakistan</p>
+        </div>
+        <button onclick="closeAddLeadModal()" class="text-slate-400 hover:text-white p-2">
+          <i class="fas fa-times text-lg"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleManualAddLead(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Business Name</label>
+          <input id="lead-bname" type="text" placeholder="e.g. Apex Detailing Atelier" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">Category</label>
+            <input id="lead-cat" type="text" placeholder="e.g. Car Detailing, Salon" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-300 mb-1">City / Country</label>
+            <input id="lead-city" type="text" placeholder="e.g. Dubai or Sydney" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1">Phone / WhatsApp Number</label>
+          <input id="lead-phone" type="text" placeholder="e.g. +971 55 241 8817 or +1 305 555 0192" class="w-full bg-[#070913] border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400">
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3">
+          <button type="button" onclick="closeAddLeadModal()" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:text-white">Cancel</button>
+          <button type="submit" class="bg-amber-400 hover:bg-amber-300 text-black text-xs font-bold px-5 py-2.5 rounded-xl shadow-md transition font-mono-tech uppercase">Build Demo Now</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

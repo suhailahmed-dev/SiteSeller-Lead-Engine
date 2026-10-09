@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Binaries & Tunnels
+*.exe
+*.zip
+cloudflared.exe
+
+# Environment & Secrets
+.env
+*.env
+scratch/
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
